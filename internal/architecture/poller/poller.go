@@ -10,18 +10,27 @@ import (
 	"time"
 )
 
-func Start(updates chan<- entities.Update) {
-	fmt.Println("poller started")
-
+func Start(updates chan entities.Update) {
 	for {
-		poll()
+		response, err := poll[endpoints.GetUpdatesResponse]()
+
+		if (err == nil) && response.Ok {
+			for _, update := range response.Result {
+				updates <- update
+			}
+		}
 
 		time.Sleep(1 * time.Second)
 	}
 }
 
-func poll() {
+func poll[R any]() (R, error) {
 	fmt.Println("poll()")
-	res, _ := net.Fetch[endpoints.GetUpdatesResponse](endpoints.GetUpdatesEndpoint)
-	fmt.Printf("%+v\n", res)
+
+	res, err := net.Fetch[R](endpoints.GetUpdatesEndpoint)
+	if err != nil {
+		return res, err
+	}
+
+	return res, nil
 }

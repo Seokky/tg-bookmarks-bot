@@ -7,6 +7,12 @@ import (
 	"tg-bookmarks-bot/internal/domain/entities"
 )
 
-func Start(updates <-chan entities.Update) {
-	fmt.Println("handler started")
+func Start(updates chan entities.Update) {
+	for {
+		select {
+		case update := <-updates:
+			fmt.Printf("handler received update: %+v\n", update)
+		}
+	}
+
 }

@@ -15,5 +15,5 @@ func Start() {
 	go poller.Start(updates)
 	go handler.Start(updates)
 
-	time.Sleep(1 * time.Second)
+	time.Sleep(2 * time.Second)
 }

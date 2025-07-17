@@ -13,6 +13,7 @@ import (
 )
 
 var host, base, token string
+var client = http.Client{}
 
 // Load environment variables
 func init() {
@@ -24,9 +25,6 @@ func init() {
 	base = os.Getenv("TELEGRAM_BASE")
 	token = os.Getenv("TELEGRAM_API_TOKEN")
 }
-
-// Create client instance once
-var client = http.Client{}
 
 // Fetch do GET request and unmarshal response to R
 func Fetch[R any](entrypoint string) (R, error) {
