@@ -7,7 +7,7 @@ import (
 	"tg-bookmarks-bot/internal/domain/entities"
 )
 
-func Start(updates chan entities.Update) {
+func Start(updates <-chan entities.Update) {
 	for {
 		update := <-updates
 		fmt.Printf("handler received update: %+v\n", update)

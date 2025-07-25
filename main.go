@@ -7,4 +7,6 @@ import (
 
 func main() {
 	operator.Start()
+
+	select {}
 }
