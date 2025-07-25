@@ -9,10 +9,8 @@ import (
 
 func Start(updates chan entities.Update) {
 	for {
-		select {
-		case update := <-updates:
-			fmt.Printf("handler received update: %+v\n", update)
-		}
+		update := <-updates
+		fmt.Printf("handler received update: %+v\n", update)
 	}
 
 }

@@ -7,5 +7,8 @@ fmt:
 vet: fmt
 	go vet ./...
 
-build: vet
+staticcheck: vet
+	staticcheck ./...
+
+build: staticcheck
 	go build
