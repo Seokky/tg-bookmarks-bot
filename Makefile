@@ -10,5 +10,8 @@ vet: fmt
 staticcheck: vet
 	staticcheck ./...
 
-build: staticcheck
+revive: staticcheck
+	revive ./...
+
+build: revive
 	go build
