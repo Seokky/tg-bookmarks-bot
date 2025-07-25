@@ -13,5 +13,8 @@ staticcheck: vet
 revive: staticcheck
 	revive ./...
 
-build: revive
+govulncheck: revive
+	govulncheck ./...
+
+build: govulncheck
 	go build
