@@ -27,9 +27,7 @@ func ProcessCommand(storer *storerPkg.Storer, text, username string) (message st
 		}
 	}()
 
-	text = strings.TrimSpace(text)
-
-	switch text {
+	switch text = strings.TrimSpace(text); text {
 	case commandEmpty:
 		return "Incorrect command"
 	case commandGetRandom, commandGetRandomShortly:
@@ -48,7 +46,6 @@ func ProcessCommand(storer *storerPkg.Storer, text, username string) (message st
 		}
 		return fmt.Sprintf("You have %d bookmarks", count)
 	default:
-		// TODO limit 150 for user
 		err := storer.Append(username, text)
 		if err != nil {
 			if errors.Is(err, storerPkg.ErrBookmarkAlreadyExists) {
