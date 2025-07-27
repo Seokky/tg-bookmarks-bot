@@ -1,0 +1,5 @@
+.env
+.idea
+.DS_Store
+tg-bookmarks-bot
+internal/infrastructure/storage/internal/sqlite/storage.db

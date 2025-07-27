@@ -3,14 +3,28 @@
 package handler
 
 import (
-	"fmt"
+	"log"
+	"tg-bookmarks-bot/internal/architecture/commander"
+	storerPkg "tg-bookmarks-bot/internal/architecture/storer"
 	"tg-bookmarks-bot/internal/domain/entities"
 )
 
 func Start(updates <-chan entities.Update) {
-	for {
-		update := <-updates
-		fmt.Printf("handler received update: %+v\n", update)
+	storer, err := storerPkg.New()
+	if err != nil {
+		log.Fatal(err)
 	}
 
+	for {
+		update := <-updates
+
+		// Wrap with goroutine to prevent blocking to read from updates channel
+		go handle(storer, update)
+	}
+
+}
+
+func handle(storer *storerPkg.Storer, update entities.Update) {
+	commander.ProcessCommand(storer, update.Message.Text, update.Message.From.Name)
+	// TODO responser.Send(response)
 }

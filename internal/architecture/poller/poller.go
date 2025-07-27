@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	errorSleepTimeout = 3  // Delay in seconds after poll request failed
-	longPollTimeout   = 10 // Timeout in seconds to long polling waiting
+	errorSleepTimeout = 3  // Delay in seconds before next poll() if poll() was failed
+	longPollTimeout   = 30 // Long polling timeout
 )
 
 // Start starts polling Telegram server to get updates
@@ -30,7 +30,13 @@ func Start(updates chan<- entities.Update) {
 
 		if response.Ok {
 			for _, update := range response.Result {
-				updates <- update
+				// Wrap with goroutine to prevent blocking Start() function
+				// in case if no candidates to read from channel right now
+				// P.S.: it means that writing to unbuffered channel wants
+				// at least one reader goroutine in status "runnable"
+				go func() {
+					updates <- update
+				}()
 
 				lastUpdateID = update.ID
 			}
