@@ -6,8 +6,13 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"path"
 )
+
+type FetchQueryParam struct {
+	Name, Value string
+}
+
+type FetchQueryParams []FetchQueryParam
 
 // Fetch do GET request and unmarshal response to R
 func Fetch[R any](entrypoint string, params FetchQueryParams) (R, error) {
@@ -58,17 +63,6 @@ func Fetch[R any](entrypoint string, params FetchQueryParams) (R, error) {
 	return formattedResult, nil
 }
 
-// Build url string from host, base, token and entrypoint
-func buildURL(entrypoint string) (string, error) {
-	if len(host) == 0 || len(base) == 0 || len(token) == 0 {
-		return "", fmt.Errorf("can't build buildURL with host = %s, base = %s, token = %s", host, base, token)
-	}
-
-	result := "https://" + path.Join(host, base+token, entrypoint)
-
-	return result, nil
-}
-
 // Attach query params to request
 func attachQueryParams(req *http.Request, params FetchQueryParams) {
 	q := req.URL.Query()
@@ -79,9 +73,3 @@ func attachQueryParams(req *http.Request, params FetchQueryParams) {
 
 	req.URL.RawQuery = q.Encode()
 }
-
-type FetchQueryParam struct {
-	Name, Value string
-}
-
-type FetchQueryParams []FetchQueryParam

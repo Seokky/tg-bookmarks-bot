@@ -64,6 +64,10 @@ func longPollingParams(fromID uint64) net.FetchQueryParams {
 			Name:  "timeout",
 			Value: strconv.Itoa(longPollTimeout),
 		},
+		{
+			Name:  "allowed_updates",
+			Value: `["message"]`,
+		},
 	}
 
 	if fromID != 0 {

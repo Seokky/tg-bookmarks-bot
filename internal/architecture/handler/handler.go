@@ -5,6 +5,7 @@ package handler
 import (
 	"log"
 	"tg-bookmarks-bot/internal/architecture/commander"
+	"tg-bookmarks-bot/internal/architecture/responser"
 	storerPkg "tg-bookmarks-bot/internal/architecture/storer"
 	"tg-bookmarks-bot/internal/domain/entities"
 )
@@ -25,6 +26,6 @@ func Start(updates <-chan entities.Update) {
 }
 
 func handle(storer *storerPkg.Storer, update entities.Update) {
-	commander.ProcessCommand(storer, update.Message.Text, update.Message.From.Name)
-	// TODO responser.Send(response)
+	message := commander.ProcessCommand(storer, update.Message.Text, update.Message.From.Name)
+	responser.Send(update.Message.Chat.ID, message)
 }
