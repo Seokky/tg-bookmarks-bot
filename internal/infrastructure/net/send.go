@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
 	"net/http"
 )
@@ -23,7 +22,6 @@ func Send[R any](entrypoint string, params PostBodyParams) (R, error) {
 	}
 
 	// Marshall params
-	fmt.Printf("%+v \n", params)
 	paramsJSON, err := json.Marshal(params)
 	if err != nil {
 		return formattedResult, err

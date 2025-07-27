@@ -3,7 +3,6 @@ package net
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
 	"net/http"
 )
@@ -33,8 +32,6 @@ func Fetch[R any](entrypoint string, params FetchQueryParams) (R, error) {
 
 	// Attach query params to request
 	attachQueryParams(req, params)
-
-	fmt.Println("poll()", req.URL.String())
 
 	// Do request
 	result, err := client.Do(req)
