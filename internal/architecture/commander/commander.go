@@ -13,7 +13,6 @@ const (
 	commandEmpty            = ""
 	commandGetRandom        = "/random"
 	commandGetRandomShortly = "/r"
-	commandPop              = "/pop"
 	commandCount            = "/count"
 	commandCountShortly     = "/c"
 )
