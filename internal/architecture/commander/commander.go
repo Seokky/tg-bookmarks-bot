@@ -2,6 +2,7 @@
 package commander
 
 import (
+	"fmt"
 	"log"
 	"strings"
 	storerPkg "tg-bookmarks-bot/internal/architecture/storer"
@@ -37,8 +38,13 @@ func ProcessCommand(storer *storerPkg.Storer, text, username string) (message st
 		if bookmark == "" {
 			return "You have no bookmark yet"
 		}
-		// TODO go storer.Delete(username, bookmark)
 		return bookmark
+	case commandCount:
+		count, err := storer.Count(username)
+		if err != nil {
+			return "Cannot get bookmark count. Please, contact @sykkoes"
+		}
+		return fmt.Sprintf("You have %d bookmarks", count)
 	default:
 		// TODO handle if bookmark already exists
 		// TODO limit 150 for user

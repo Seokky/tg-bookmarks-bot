@@ -9,6 +9,8 @@ import (
 type Storage interface {
 	Insert(username, bookmark string) error
 	Random(username string) (string, error)
+	Count(username string) (int, error)
+	Delete(username, bookmark string) error
 }
 
 const (
