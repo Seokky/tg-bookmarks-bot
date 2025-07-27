@@ -11,6 +11,7 @@ type Storage interface {
 	Random(username string) (string, error)
 	Count(username string) (int, error)
 	Delete(username, bookmark string) error
+	Exists(username, bookmark string) (bool, error)
 }
 
 const (

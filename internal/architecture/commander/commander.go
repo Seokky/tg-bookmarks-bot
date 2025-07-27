@@ -2,6 +2,7 @@
 package commander
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"strings"
@@ -14,6 +15,7 @@ const (
 	commandGetRandomShortly = "/r"
 	commandPop              = "/pop"
 	commandCount            = "/count"
+	commandCountShortly     = "/c"
 )
 
 func ProcessCommand(storer *storerPkg.Storer, text, username string) (message string) {
@@ -39,17 +41,19 @@ func ProcessCommand(storer *storerPkg.Storer, text, username string) (message st
 			return "You have no bookmark yet"
 		}
 		return bookmark
-	case commandCount:
+	case commandCount, commandCountShortly:
 		count, err := storer.Count(username)
 		if err != nil {
 			return "Cannot get bookmark count. Please, contact @sykkoes"
 		}
 		return fmt.Sprintf("You have %d bookmarks", count)
 	default:
-		// TODO handle if bookmark already exists
 		// TODO limit 150 for user
 		err := storer.Append(username, text)
 		if err != nil {
+			if errors.Is(err, storerPkg.ErrBookmarkAlreadyExists) {
+				return "Bookmark already exists"
+			}
 			return "Cannot append bookmark. Please, contact @sykkoes"
 		}
 		return "Bookmark appended successfully"
