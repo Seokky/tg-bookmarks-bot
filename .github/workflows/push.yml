@@ -24,7 +24,7 @@ jobs:
           script: |
             cd /tg-bookmarks-bot
             eval "$(ssh-agent -s)"
-            ssh-add ~/.ssh/id_rsa
+            ssh-add ~/.ssh/id_ed25519
             git config pull.rebase true
             git pull origin main
             docker system prune -f
