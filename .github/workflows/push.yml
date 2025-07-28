@@ -29,5 +29,4 @@ jobs:
             git pull origin main
             go build
             killall tg-bookmarks-bot
-            nohup ./tg-bookmarks-bot &
-            exit
+            RUNNER_TRACKING_ID="" && (nohup ./tg-bookmarks-bot &)
