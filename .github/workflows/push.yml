@@ -30,4 +30,4 @@ jobs:
             docker system prune -f
             docker build -t tgbotbookmarks .
             docker container kill tgbotbookmarks
-            docker run --name=tgbotbookmarks --rm -d tgbotbookmarks
+            docker run --name=tgbotbookmarks --rm -d -v /tgbotbookmarks/internal/infrastructure/storage/internal/sqlite/storage.db:/usr/src/tgbotbookmarks/internal/infrastructure/storage/internal/sqlite/storage.db tgbotbookmarks
