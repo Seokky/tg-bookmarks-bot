@@ -1,3 +1,4 @@
+// Package storage implements methods to work with managing data in storage
 package storage
 
 import (
@@ -18,6 +19,7 @@ const (
 	StorageTypeSqlite = "sqlite"
 )
 
+// New creates storage instance
 func New(storageType string) (Storage, error) {
 	switch storageType {
 	case StorageTypeSqlite:

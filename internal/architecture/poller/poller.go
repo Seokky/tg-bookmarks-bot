@@ -1,5 +1,4 @@
-// Package poller
-// polls the Telegram server and writes updates to updates channel
+// Package poller polls the Telegram server and writes updates to updates channel
 package poller
 
 import (

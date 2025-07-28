@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// Insert performs inserting user's bookmark into database table
 func (s *Storage) Insert(username, bookmark string) error {
 	query := "INSERT INTO " + tableName + " (username, bookmark) VALUES (?, ?)"
 

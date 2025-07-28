@@ -6,6 +6,7 @@ import (
 	"fmt"
 )
 
+// Count returns count of user's bookmarks
 func (s *Storage) Count(username string) (int, error) {
 	query := "SELECT COUNT(*) FROM " + tableName + ` WHERE username = ?`
 

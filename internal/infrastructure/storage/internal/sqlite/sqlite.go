@@ -1,3 +1,4 @@
+// Package sqlite implements methods to work with SQLite storage
 package sqlite
 
 import (
@@ -16,6 +17,7 @@ const (
 	tableName = "bookmarks"
 )
 
+// New creates instance of Storage
 func New() (*Storage, error) {
 	db, err := sql.Open("sqlite3", pathToDb)
 	if err != nil {

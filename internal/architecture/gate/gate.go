@@ -1,3 +1,4 @@
+// Package gate authenticates Telegram users who trying to use bot
 package gate
 
 import (
@@ -8,6 +9,7 @@ import (
 	"strings"
 )
 
+// Authenticate checks if user allowed to use bot
 func Authenticate(username string) bool {
 	if err := godotenv.Load(); err != nil {
 		log.Fatal("can't load .env file")

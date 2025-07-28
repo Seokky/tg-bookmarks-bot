@@ -6,6 +6,7 @@ import (
 	"fmt"
 )
 
+// Exists checks if user already have bookmark
 func (s *Storage) Exists(username, bookmark string) (bool, error) {
 	query := "SELECT bookmark FROM " + tableName + " WHERE username = ? AND bookmark = ?"
 

@@ -3,7 +3,7 @@ package storer
 import "errors"
 
 var (
-	ErrBookmarkAlreadyExists = errors.New("Bookmark already exists")
+	ErrBookmarkAlreadyExists = errors.New("bookmark already exists")
 )
 
 func (s *Storer) Append(username, bookmark string) error {

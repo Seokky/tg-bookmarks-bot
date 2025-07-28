@@ -8,6 +8,7 @@ import (
 	"net/http"
 )
 
+// PostBodyParams is map[string]any that describes POST request body payload
 type PostBodyParams map[string]any
 
 // Send do POST request and unmarshal response to R

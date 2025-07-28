@@ -1,3 +1,4 @@
+// Package net works with net requests like GET and POST
 package net
 
 import (

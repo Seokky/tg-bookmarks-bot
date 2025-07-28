@@ -7,10 +7,12 @@ import (
 	"net/http"
 )
 
+// FetchQueryParam describes schema of each parameter passed to fetch request
 type FetchQueryParam struct {
 	Name, Value string
 }
 
+// FetchQueryParams is slice of parameters passed to fetch request
 type FetchQueryParams []FetchQueryParam
 
 // Fetch do GET request and unmarshal response to R

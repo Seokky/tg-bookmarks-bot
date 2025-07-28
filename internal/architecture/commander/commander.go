@@ -1,4 +1,4 @@
-// Package commander
+// Package commander orchestrates handling command passed from user
 package commander
 
 import (
@@ -17,6 +17,7 @@ const (
 	commandCountShortly     = "/c"
 )
 
+// ProcessCommand do relevant work depends on command passed and returns result message
 func ProcessCommand(storer *storerPkg.Storer, text, username string) (message string) {
 	defer func() {
 		if err := recover(); err != nil {

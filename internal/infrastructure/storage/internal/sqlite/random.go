@@ -6,6 +6,7 @@ import (
 	"fmt"
 )
 
+// Random select and return random of the user's bookmark
 func (s *Storage) Random(username string) (string, error) {
 	query := "SELECT bookmark FROM " + tableName + ` WHERE username = ? ORDER BY random() LIMIT 1`
 

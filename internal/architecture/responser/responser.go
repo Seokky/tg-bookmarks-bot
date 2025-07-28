@@ -5,9 +5,9 @@ import (
 	"tg-bookmarks-bot/internal/infrastructure/net"
 )
 
-func Send(chatId uint64, text string) {
+func Send(chatID uint64, text string) {
 	params := map[string]any{
-		"chat_id": chatId,
+		"chat_id": chatID,
 		"text":    text,
 	}
 

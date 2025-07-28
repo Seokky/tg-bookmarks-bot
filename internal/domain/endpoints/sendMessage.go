@@ -3,7 +3,7 @@ package endpoints
 import "tg-bookmarks-bot/internal/domain/entities"
 
 type SendMessageParams struct {
-	ChatId uint64 `json:"chat_id"`
+	ChatID uint64 `json:"chat_id"`
 	Text   string `json:"text"`
 }
 type SendMessageResponse struct {

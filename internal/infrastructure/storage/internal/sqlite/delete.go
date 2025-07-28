@@ -2,6 +2,7 @@ package sqlite
 
 import "fmt"
 
+// Delete performs removal of user's bookmark
 func (s *Storage) Delete(username, bookmark string) error {
 	query := "DELETE FROM " + tableName + " WHERE username = ? AND bookmark = ?"
 
