@@ -30,3 +30,4 @@ jobs:
             go build
             killall tg-bookmarks-bot
             nohup ./tg-bookmarks-bot &
+            exit
