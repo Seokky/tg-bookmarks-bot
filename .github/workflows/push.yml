@@ -29,4 +29,5 @@ jobs:
             git pull origin main
             docker system prune -f
             docker build -t tgbotbookmarks .
-            docker run --rm -d tgbotbookmarks
+            docker container kill tgbotbookmarks
+            docker run --name=tgbotbookmarks --rm -d tgbotbookmarks
