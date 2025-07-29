@@ -7,6 +7,7 @@ import (
 	"tg-bookmarks-bot/internal/infrastructure/storage/internal/sqlite"
 )
 
+// Storage describes interface that should implement storage instance
 type Storage interface {
 	Insert(username, bookmark string) error
 	Random(username string) (string, error)
@@ -16,13 +17,14 @@ type Storage interface {
 }
 
 const (
-	StorageTypeSqlite = "sqlite"
+	// KindSqlite contains key meaning using of SQLite database
+	KindSqlite = "sqlite"
 )
 
 // New creates storage instance
 func New(storageType string) (Storage, error) {
 	switch storageType {
-	case StorageTypeSqlite:
+	case KindSqlite:
 		storage, err := sqlite.New()
 		if err != nil {
 			log.Fatal(err)

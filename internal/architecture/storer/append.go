@@ -3,9 +3,11 @@ package storer
 import "errors"
 
 var (
+	// ErrBookmarkAlreadyExists is sentinel error for bookmark already exists
 	ErrBookmarkAlreadyExists = errors.New("bookmark already exists")
 )
 
+// Append performs adding user's bookmark
 func (s *Storer) Append(username, bookmark string) error {
 	exists, err := s.storage.Exists(username, bookmark)
 	if err != nil {

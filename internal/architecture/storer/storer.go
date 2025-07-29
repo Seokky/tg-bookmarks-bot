@@ -1,3 +1,4 @@
+// Package storer implements abstraction layer to work with storage
 package storer
 
 import (
@@ -12,7 +13,7 @@ type Storer struct {
 
 // New creates instance of Storer
 func New() (*Storer, error) {
-	storer, err := storage.New(storage.StorageTypeSqlite)
+	storer, err := storage.New(storage.KindSqlite)
 	if err != nil {
 		return nil, fmt.Errorf("could not create storer: %w", err)
 	}

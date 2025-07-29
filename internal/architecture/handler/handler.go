@@ -1,5 +1,4 @@
-// Package handler
-// Reads updates from the updates channel and processes them
+// Package handler reads updates from the updates channel and processes them
 package handler
 
 import (
@@ -11,6 +10,7 @@ import (
 	"tg-bookmarks-bot/internal/domain/entities"
 )
 
+// Start manages receiving updates from updates channel and pass it to handle func
 func Start(updates <-chan entities.Update) {
 	storer, err := storerPkg.New()
 	if err != nil {
@@ -26,6 +26,7 @@ func Start(updates <-chan entities.Update) {
 
 }
 
+// Handle update received from polling Telegram server
 func handle(storer *storerPkg.Storer, update entities.Update) {
 	allowed := gate.Authenticate(update.Message.From.Name)
 	if !allowed {

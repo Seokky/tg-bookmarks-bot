@@ -10,4 +10,5 @@ type GetUpdatesResponse struct {
 	Result []entities.Update `json:"result"`
 }
 
+// GetUpdatesEndpoint describes path of endpoint to get updates by polling Telegram server
 const GetUpdatesEndpoint = "/getUpdates"

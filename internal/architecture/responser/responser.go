@@ -1,3 +1,4 @@
+// Package responser sends response messages to users
 package responser
 
 import (
@@ -5,6 +6,7 @@ import (
 	"tg-bookmarks-bot/internal/infrastructure/net"
 )
 
+// Send performs send response message to user
 func Send(chatID uint64, text string) {
 	params := map[string]any{
 		"chat_id": chatID,

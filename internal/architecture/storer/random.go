@@ -2,6 +2,7 @@ package storer
 
 import "fmt"
 
+// Random performs getting the random one of the user's bookmarks
 func (s *Storer) Random(username string) (bookmark string, err error) {
 	bookmark, err = s.storage.Random(username)
 	if err != nil {

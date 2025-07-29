@@ -1,5 +1,4 @@
-// Package operator
-// Manages the interaction of the poller, commander, and responser
+// Package operator manages the interaction of the poller, commander, and responser
 package operator
 
 import (
@@ -8,6 +7,7 @@ import (
 	"tg-bookmarks-bot/internal/domain/entities"
 )
 
+// Start performs launch poller and handler and pass updates channel to both of them
 func Start() {
 	updates := make(chan entities.Update)
 

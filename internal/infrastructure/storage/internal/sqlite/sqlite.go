@@ -8,6 +8,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+// Storage describes struct contains db instance
 type Storage struct {
 	db *sql.DB
 }
