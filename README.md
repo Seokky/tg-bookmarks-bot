@@ -13,4 +13,11 @@ Available at @bookmarks_storer_bot in Telegram. To use this, contact me (@sykkoe
 ## Implementation
 Bot using long polling to get updates, so everything needed to make it work is running process of this program.
 
-
+## To do
+- use context to add timeout to poll request
+- use context to add timeout to send request
+- implement tests for net.Fetch using httptest
+- implement test for net.Send using httptest
+- pass to net.Fetch url instead of entrypoint
+- pass to net.Send url instead of entrypoint
+- synchronize order of updates handling for concrete user
