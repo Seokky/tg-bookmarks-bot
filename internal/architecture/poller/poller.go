@@ -16,11 +16,11 @@ const (
 )
 
 // Start starts polling Telegram server to get updates
-func Start(updates chan<- entities.Update) {
+func Start(client net.Client, updates chan<- entities.Update) {
 	var lastUpdateID uint64
 
 	for {
-		response, err := poll(lastUpdateID)
+		response, err := poll(client, lastUpdateID)
 
 		if err != nil {
 			time.Sleep(errorSleepTimeout * time.Second)
@@ -44,10 +44,10 @@ func Start(updates chan<- entities.Update) {
 }
 
 // Make long polling request
-func poll(fromID uint64) (endpoints.GetUpdatesResponse, error) {
+func poll(client net.Client, fromID uint64) (endpoints.GetUpdatesResponse, error) {
 	params := longPollingParams(fromID)
 
-	res, err := net.Fetch[endpoints.GetUpdatesResponse](endpoints.GetUpdatesEndpoint, params)
+	res, err := net.Fetch[endpoints.GetUpdatesResponse](client, endpoints.GetUpdatesEndpoint, params)
 
 	if err != nil {
 		return res, err

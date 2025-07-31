@@ -7,11 +7,11 @@ import (
 )
 
 // Send performs send response message to user
-func Send(chatID uint64, text string) {
+func Send(client net.Client, chatID uint64, text string) {
 	params := map[string]any{
 		"chat_id": chatID,
 		"text":    text,
 	}
 
-	_, _ = net.Send[endpoints.SendMessageResponse](endpoints.SendMessageEndpoint, params)
+	_, _ = net.Send[endpoints.SendMessageResponse](client, endpoints.SendMessageEndpoint, params)
 }

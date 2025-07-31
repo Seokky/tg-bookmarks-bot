@@ -12,7 +12,7 @@ import (
 func loadOnce() {
 	sync.OnceFunc(func() {
 		if err := godotenv.Load(); err != nil {
-			log.Fatal("can't load .env file")
+			log.Fatal("can't load .env: ", err)
 		}
 	})()
 }

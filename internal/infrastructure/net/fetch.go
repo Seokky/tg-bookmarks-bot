@@ -16,12 +16,12 @@ type FetchQueryParam struct {
 type FetchQueryParams []FetchQueryParam
 
 // Fetch do GET request and unmarshal response to R
-func Fetch[R any](entrypoint string, params FetchQueryParams) (R, error) {
+func Fetch[R any](client Client, entrypoint string, params FetchQueryParams) (R, error) {
 	// Initialize R with zero value
 	var formattedResult R
 
 	// Build url string
-	url, err := buildURL(entrypoint)
+	url, err := client.BuildURL(entrypoint)
 	if err != nil {
 		return formattedResult, err
 	}
@@ -36,7 +36,7 @@ func Fetch[R any](entrypoint string, params FetchQueryParams) (R, error) {
 	attachQueryParams(req, params)
 
 	// Do request
-	result, err := client.Do(req)
+	result, err := client.client.Do(req)
 	if err != nil {
 		return formattedResult, err
 	}

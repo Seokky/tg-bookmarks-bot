@@ -12,12 +12,12 @@ import (
 type PostBodyParams map[string]any
 
 // Send do POST request and unmarshal response to R
-func Send[R any](entrypoint string, params PostBodyParams) (R, error) {
+func Send[R any](client Client, entrypoint string, params PostBodyParams) (R, error) {
 	// Initialize R with zero value
 	var formattedResult R
 
 	// Build url string
-	url, err := buildURL(entrypoint)
+	url, err := client.BuildURL(entrypoint)
 	if err != nil {
 		return formattedResult, err
 	}

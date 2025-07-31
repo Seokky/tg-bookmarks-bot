@@ -2,29 +2,57 @@
 package net
 
 import (
-	"fmt"
-	"log"
+	"errors"
 	"net/http"
 	"path"
-	"tg-bookmarks-bot/internal/infrastructure/env"
 )
 
 var (
-	host  = env.Get("TELEGRAM_HOST")
-	base  = env.Get("TELEGRAM_BASE")
-	token = env.Get("TELEGRAM_API_TOKEN")
+	ErrNoHostProvided     = errors.New("no host provided")
+	ErrNoBaseProvided     = errors.New("no base provided")
+	ErrNoTokenProvided    = errors.New("no token provided")
+	ErrNoProtocolProvided = errors.New("no protocol provided")
 )
 
-var client = http.Client{}
+// Client describes http client structure
+type Client struct {
+	client   *http.Client
+	host     string
+	base     string
+	token    string
+	protocol string
+}
 
-// Build url string from host, base, token and entrypoint
-func buildURL(entrypoint string) (string, error) {
-	if len(host) == 0 || len(base) == 0 || len(token) == 0 {
-		log.Fatal("no")
-		return "", fmt.Errorf("can't build buildURL with host = %s, base = %s, token = %s", host, base, token)
+// NewClient returns pointer to [Client] instance
+func NewClient(host, base, token, protocol string) *Client {
+	return &Client{
+		client:   &http.Client{},
+		host:     host,
+		base:     base,
+		token:    token,
+		protocol: protocol,
+	}
+}
+
+// BuildURL performs constructing URL string from host, base, token and entrypoint
+func (c Client) BuildURL(entrypoint string) (string, error) {
+	if len(c.host) == 0 {
+		return "", ErrNoHostProvided
 	}
 
-	result := "https://" + path.Join(host, base+token, entrypoint)
+	if len(c.base) == 0 {
+		return "", ErrNoBaseProvided
+	}
+
+	if len(c.token) == 0 {
+		return "", ErrNoTokenProvided
+	}
+
+	if len(c.protocol) == 0 {
+		return "", ErrNoProtocolProvided
+	}
+
+	result := c.protocol + "://" + path.Join(c.host, c.base+c.token, entrypoint)
 
 	return result, nil
 }
