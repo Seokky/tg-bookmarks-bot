@@ -11,8 +11,6 @@ Available at @bookmarks_storer_bot in Telegram. To use this, contact me (@sykkoe
 - just text or link - performs save provided message as bookmark
 
 ## Implementation
-Bot using long polling to get updates, so everything needed to make it work - is running process of this program. SQLite used as storage.
+Bot using long polling to get updates, so everything needed to make it work is running process of this program.
 
-Scheme is a little bit outdated but in general is relevant still:
 
-<img width="696" height="711" alt="image" src="https://github.com/user-attachments/assets/2675f18c-4653-4795-b348-27c05a70348a" />
